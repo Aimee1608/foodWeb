@@ -1,15 +1,15 @@
 <template>
-    <div>
-        <div class="">
-            <a href="#Hellow">Hellow</a>
-            <a href="#demoVif">demo-v-if</a>
-            <a href="#demo01">demo01</a>
-            <a href="#demoFor">demo-for</a>
-        </div>
+    <div class="">
+        <wbc-nav></wbc-nav>
+        <p>详情</p>
+
     </div>
+
+
 </template>
 
 <script>
+import Header from '../publicTem/Header.vue'
     export default {
         data() { //选项 / 数据
             return {
@@ -20,6 +20,7 @@
 
         },
         components: { //定义组件
+            'wbc-nav': Header
 
         },
         created() { //生命周期函数

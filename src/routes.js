@@ -1,14 +1,15 @@
+import Home from './templet/mainTem/Home.vue'
+import Foodlist from './templet/mainTem/Foodlist.vue'
+import Select from './templet/mainTem/Select.vue'
+import Hotnews from './templet/mainTem/Hotnews.vue'
 
-import Hellow from './demo/Hellow.vue'
-import demo01 from './demo/demo01.vue'
-import demoVif from './demo/demo-v-if.vue'
-import demoFor from './demo/demo-for.vue'
 
 const routes =[
-    {path:'/Hellow',component:Hellow},
-    {path:'/demo01',component:demo01},
-    {path:'/demoVif',component:demoVif},
-    {path:'/demoFor',component:demoFor}
+    {path: '/',component: Home},
+    {path:'/Home',component:Home},
+    {path:'/Foodlist',component:Foodlist},
+    {path:'/Select',component:Select},
+    {path:'/Hotnews',component:Hotnews}
 ]
 
 export default routes
