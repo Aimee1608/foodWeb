@@ -2,23 +2,21 @@
   <div class="block" >
     <!-- <span class="demonstration">默认 Hover 指示器触发</span> -->
     <el-carousel height="150px">
-      <el-carousel-item v-for="item in imgList" :key="item.index">
-        <img class="carouselImg" v-bind:src="item.url" alt="">
+      <el-carousel-item v-for="item in temCarouselList" :key="item.id">
+          <a class="imgBox" href="#/Itemlist">
+               <img :src="item.img" class="image">
+          </a>
       </el-carousel-item>
     </el-carousel>
   </div>
 </template>
 
 <script>
+import {GetFocus} from '../../pubJS/server.js'
     export default {
         data() { //选项 / 数据
             return {
-                imgList:[
-                    {index:0,url:'src/img/0.jpg'},
-                    {index:1,url:'src/img/2.jpg'},
-                    {index:2,url:'src/img/3.jpg'},
-                    {index:3,url:'src/img/4.jpg'}
-                ]
+                temCarouselList:''
             }
         },
         methods: { //事件处理器
@@ -28,14 +26,18 @@
 
         },
         created() { //生命周期函数
-
+            GetFocus((msg)=>{
+                this.temCarouselList = msg;
+                console.log(this.temCardList);
+            })
         }
     }
 </script>
 
 <style>
     .block{
-        margin:20px 0;
+        margin-bottom:20px;
+        box-shadow:0 2px 4px 0 rgba(0,0,0,.12),0 0 6px 0 rgba(0,0,0,.04);
     }
     .el-carousel__item h3 {
        color: #475669;

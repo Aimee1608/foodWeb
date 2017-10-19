@@ -1,28 +1,31 @@
-<template>
-    <div>
-        关于美食美荟
+<template lang="html">
+    <div  class="">
+        <wbc-nav ></wbc-nav>
+        <el-row class="container">
+            <el-col :span="24">
+                关于
+            </el-col>
+        </el-row>
+        <wbc-footer></wbc-footer>
     </div>
 </template>
 
 <script>
-    export default {
-        data() { //选项 / 数据
-            return {
-
-            }
-        },
-        methods: { //事件处理器
-
-        },
-        components: { //定义组件
-
-        },
-        created() { //生命周期函数
+import Header from '../publicTem/Header.vue'
+import Footer from '../publicTem/Footer.vue'
+export default {
+    data (){
+        return{
 
         }
-    }
+    },
+    components: {
+          'wbc-nav': Header,//导航
+          'wbc-footer':Footer
+          // 'wbc-menu': Menu,
+      }
+}
 </script>
 
-<style>
-
+<style lang="css">
 </style>

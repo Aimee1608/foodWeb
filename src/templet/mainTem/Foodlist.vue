@@ -3,23 +3,42 @@
         <wbc-nav></wbc-nav>
         <el-row class="container">
             <el-col :span="24">
-                <el-row class="shotBox">
-                    <el-col class="shotSelect" :xs="12" :sm="6" :md="6" v-for="(o, index) in 4" :key="o">
-                        <h1>热门食材</h1>
-                        <el-row>
-                            <el-col class="item" :xs="6" :sm="8" :md="6" v-for="(o, index) in selectItem" :key="o">
-                                <a href="#">{{o}}</a>
-                            </el-col>
-                        </el-row>
+                <el-row class="shotBox" >
+                    <el-col class="shotSelect" :xs="12" :sm="6" :md="6" v-for="(item,index) in classList" :key="item.id" v-if="index<=3?true:false">
+                        <h1>{{item.class_name}}</h1>
+                        <ul >
+                            <li v-for="ditem in item.class_names" :key="ditem.id"><a :href="'#/Foodlist?classId='+ditem.id" >{{ditem.class_name}}</a></li>
+                        </ul>
                     </el-col>
                 </el-row>
-                <Foodlist></Foodlist>
-                <Pagination
-                 :totalCount="totalCount"
-                :currentPage="currentPage"
-                :pageSize="pageSize"
-                @sendNum="sendNum"
-                 ></Pagination>
+             </el-col>
+             <el-col :span="24">
+                 <el-row :gutter="20" class="temCard">
+                   <el-col class="cardCol" :xs="12" :sm="8" :md="8"  v-for="item in temCardList" :key="item.id" >
+                     <el-card :body-style="{ padding: '0px' }">
+                         <a class="imgBox" href="#/Itemlist">
+                              <img :src="item.img" class="image">
+                         </a>
+                       <div class="inner" style="padding: 15px;">
+                         <a class="title" href="#/Itemlist">{{item.name}}</a>
+                         <div class="bottom clearfix">
+                           <span>{{item.collect}}收藏 · {{item.like}}点赞</span>
+                         </div>
+                         <div class="photo">
+                             <img src="src/img/cai02.png" alt="">
+                             <p>{{item.author}}</p>
+                         </div>
+                       </div>
+                     </el-card>
+                   </el-col>
+
+                 </el-row>
+                 <div v-show="hasMore"  class="addMore" @click="addMoreFun">
+                     <p>点击加载更多</p>
+                 </div>
+                 <div v-show="!hasMore" class="noMore" >
+                     没有更多数据
+                 </div>
              </el-col>
         </el-row>
         <wbc-footer></wbc-footer>
@@ -30,58 +49,84 @@
 // import home from './Home.vue'
 import Header from '../publicTem/Header.vue'
 import Footer from '../publicTem/Footer.vue'
-import Foodlist from '../publicTem/temCard.vue'
-import temPagination from '../publicTem/temPagination.vue'
+// import Foodlist from '../publicTem/temCard.vue'
+import {classList,IndexShowList,searchShowList} from '../../pubJS/server.js'
     export default {
         data() { //选项 / 数据
             return {
-                currentPage: 5,
-                totalCount:600,
-                pageSize:8,
-                now:0,
-                selectItem:[
-                    "美食",
-                    "美食",
-                    "美食",
-                    "美食",
-                    "美食",
-                    "美食",
-                    "美食",
-                    "美食",
-                    "美食"
-                ]
+                classList:'',//分类
+                temCardList:'',//最新列表
+                pageId:0,//当前ID号
+                classId:'',//分类id
+                keywords:'',//关键词
+                hasMore:true//是否还有更多
             }
         },
         computed:{
             // console.log(1111);
         },
         methods: { //事件处理器
-             sendNum(val){
-                 console.log('hahah',val);
-                 this.currentPage = val;
-             }
+            showSearchShowList:function(initpage){
+                searchShowList(this.pageId,this.keywords,this.classId,(result)=>{
+                    if(result.code==1001){
+                        var msg = result.data;
+                        // console.log(result.data);
+                        if(msg.length>0&&msg.length<8){
+                            this.hasMore = false
+                        }else{
+                            this.hasMore = true;
+                        }
+                        if(initpage){
+                            this.temCardList = msg;
+                        }else{
+                            this.temCardList = this.temCardList.concat(msg);
+                        }
+                        this.pageId = msg[msg.length-1].id;
+                        // console.log(this.temCardList);
+                    }else if(result.code==1003){
+                        this.hasMore = false;
+                    }
+                })
+            },
+            addMoreFun:function(){
+                this.showSearchShowList(false);
+            }
+
         },
         components: { //定义组件
             'wbc-nav': Header,//首页
-            'Pagination':temPagination,//分页
-            'Foodlist':Foodlist,//列表
             'wbc-footer':Footer
         },
+        watch: {
+           // 如果路由有变化，会再次执行该方法
+           '$route':'addMoreFun'
+         },
         created() { //生命周期函数
-
+            console.log(this.$route.query.keywords);
+            this.classId = (this.$route.query.classId==undefined?'':parseInt(this.$route.query.classId));
+            this.keywords = (this.$route.query.keywords==undefined?'':this.$route.params.keywords);
+            console.log(this.classId,this.keywords);
+            classList((msg)=>{//分类列表
+                this.classList = msg;
+            });
+            this.showSearchShowList(true);
         }
     }
 </script>
 
 <style>
+/**********快捷分类列表***********/
 .shotBox{
     /*padding:30px 0;*/
     margin-bottom: 35px;
     background: #f4f0ec;
+    box-shadow:0 2px 4px 0 rgba(0,0,0,.12),0 0 6px 0 rgba(0,0,0,.04);
 }
 .shotSelect{
     border-right:1px dotted #e4e4e4;
     margin: 30px 0;
+    min-height: 120px;
+    /*padding:0 10px;*/
     /*padding:4px 0 0 15px;*/
 }
 .shotSelect:last-child{
@@ -92,12 +137,114 @@ import temPagination from '../publicTem/temPagination.vue'
     line-height: 150%;
     margin-bottom:7px;
 }
-.shotSelect a{
-    padding:4px 3px;
-}
+
 .item{
     padding:3px 0;
     /*line-height: 20px;*/
     /*height:20px;*/
 }
+
+.shotSelect ul{
+    /*min-height: 120px;*/
+    text-align: center;
+}
+.shotSelect ul li{
+    display: inline-block;
+
+}
+.shotSelect ul li a{
+    display: inline-block;
+    padding:5px 10px;
+    /*line-height: 28px;*/
+    text-align: center;
+}
+/**********菜谱列表**************/
+.temCard .cardCol{
+    margin-bottom:20px;
+}
+.temCard .time {
+font-size: 13px;
+color: #999;
+}
+.temCard .inner{
+    position: relative;
+}
+.temCard .photo{
+    position: absolute;
+    right:15px;
+    top:-14px;
+    text-align: center;
+    overflow: hidden;
+    font-size: 12px;
+    color:#6a6a6a;
+    width:82px;
+}
+.temCard .photo img{
+    background:#999;
+    width:46px;
+    height:46px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    padding:5px;
+}
+
+.temCard .bottom {
+    margin-top: 12px;
+    line-height: 12px;
+}
+.temCard .bottom span{
+    font-size:12px;
+    color:#6a6a6a;
+    line-height: 24px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    padding-right:10px;
+}
+
+.temCard .button {
+    padding: 0;
+    float: right;
+}
+.temCard .imgBox{
+    width:100%;
+    height:200px;
+    cursor: pointer;
+    display: block;
+    border-radius: 4px;
+}
+.temCard .image {
+/*max-width: 100%;*/
+    width:100%;
+    height:100%;
+    object-fit:cover;
+/*display: inline-block;*/
+/*display: block;*/
+}
+.temCard .title{
+    cursor: pointer;
+    font-size: 16px;
+    color:#333;
+}
+.addMore{
+    text-align: center;
+    height:50px;
+    background:#FFCC66;
+    border-radius: 3PX;
+    box-shadow:0 2px 4px 0 rgba(0,0,0,.12),0 0 6px 0 rgba(0,0,0,.04);
+}
+.addMore p{
+    line-height: 50px;
+    color:#A37011;
+    font-weight: bold;
+    letter-spacing: 3px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.noMore {
+    text-align: center;
+    height:50px;
+    line-height: 50px;
+}
+
 </style>

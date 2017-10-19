@@ -3,7 +3,7 @@
         <wbc-nav ></wbc-nav>
         <el-row class="container">
             <el-col :span="24">
-                意见反馈
+                广告合作
             </el-col>
         </el-row>
         <wbc-footer></wbc-footer>

@@ -3,11 +3,11 @@
         <wbc-nav ></wbc-nav>
         <el-row class="container">
             <el-col :span="24">
-                <div class="selectList" v-for="(o, index) in selectItem" :key="o">
-                    <h1>热门食材</h1>
+                <div class="selectList" v-for="(item, index) in selectList" :key="item.id">
+                    <h1>{{item.class_name}}</h1>
                     <el-row >
-                        <el-col :xs="6" :sm="3" v-for="(o, index) in selectItem" :key="o">
-                            <a href="#">{{o}}</a>
+                        <el-col :xs="6" :sm="3" v-for="(ditem, index) in item.class_names" :key="ditem.id">
+                            <a href="#/Foodlist">{{ditem.class_name}}</a>
                         </el-col>
                     </el-row>
                 </div>
@@ -20,27 +20,24 @@
 <script>
 import Header from '../publicTem/Header.vue'
 import Footer from '../publicTem/Footer.vue'
+import {classList} from '../../pubJS/server.js'
 export default {
     name:'Select',
     data () {
         return {
-            selectItem:[
-                "美食",
-                "美食",
-                "美食",
-                "美食",
-                "美食",
-                "美食",
-                "美食",
-                "美食",
-                "美食"
-            ]
+            selectList:''
         }
     },
     components: {
           'wbc-nav': Header,
            'wbc-footer':Footer
           // 'wbc-menu': Menu,
+      },
+      created() { //生命周期函数
+          classList((msg)=>{
+              this.selectList = msg;
+              console.log(msg);
+          })
       }
 }
 </script>
@@ -55,11 +52,17 @@ export default {
     width:300px;
     padding:17px 0 8px 0;
     font-size: 16px;
-    margin:0;
+    margin-bottom:8px;
     font-weight: bold;
 }
-    .selectList ul li{
+.selectList a{
+    padding:3px 4px;
+    display: inline-block;
+}
+.selectList a:hover{
+    /*text-decoration:underline;*/
+    background:#A37011;
+    color:#fff;
+}
 
-
-    }
 </style>
