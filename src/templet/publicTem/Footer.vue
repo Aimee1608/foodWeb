@@ -3,10 +3,10 @@
         <el-row class="container">
             <el-col :span="24">
                 <div class="link">
-                    <a href="#/About">关于美食美荟</a>
-                    <a href="#/Advertising">广告合作</a>
-                    <a href="#/Suggestion">意见反馈</a>
-                    <a href="#/FriendsLink">友情链接</a>
+                    <a href="#/About" target="_blank">关于美食美荟</a>
+                    <a href="#/Advertising" target="_blank">广告合作</a>
+                    <a href="#/Suggestion" target="_blank">意见反馈</a>
+                    <a href="#/FriendsLink" target="_blank">友情链接</a>
 
                 </div>
                 <div class="Recordnumber">
@@ -51,5 +51,8 @@
 }
 .Recordnumber{
     margin:20px 0;
+}
+.link a{
+    padding:10px;
 }
 </style>

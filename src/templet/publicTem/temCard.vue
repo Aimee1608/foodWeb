@@ -3,11 +3,11 @@
     <el-row :gutter="20" class="temCard">
       <el-col class="cardCol" :xs="12" :sm="8" :md="8"  v-for="item in temCardList" :key="item.id" >
         <el-card :body-style="{ padding: '0px' }">
-            <a class="imgBox" href="#/Itemlist">
+            <a class="imgBox" :href="'#/Itemlist?foodId='+item.id" >
                  <img :src="item.img" class="image">
             </a>
           <div class="inner" style="padding: 15px;">
-            <a class="title" href="#/Itemlist">{{item.name}}</a>
+            <a class="title" :href="'#/Itemlist?foodId='+item.id" >{{item.name}}</a>
             <div class="bottom clearfix">
               <span>{{item.collect}}收藏 · {{item.like}}点赞</span>
             </div>
@@ -63,14 +63,14 @@ import {IndexShowList} from '../../pubJS/server.js'
         created() { //生命周期函数
             IndexShowList(this.pageId,(msg)=>{
                 this.temCardList = msg;
-                console.log(msg);
+                // console.log(msg);
                 if(msg.length>0&&msg.length<8){
                     this.hasMore = false
                 }else{
                     this.hasMore = true;
                 }
                 this.pageId = msg[msg.length-1].id;
-                console.log(this.temCardList);
+                // console.log(this.temCardList);
             })
         }
     }

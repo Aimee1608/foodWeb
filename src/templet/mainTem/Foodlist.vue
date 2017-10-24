@@ -7,20 +7,20 @@
                     <el-col class="shotSelect" :xs="12" :sm="6" :md="6" v-for="(item,index) in classList" :key="item.id" v-if="index<=3?true:false">
                         <h1>{{item.class_name}}</h1>
                         <ul >
-                            <li v-for="ditem in item.class_names" :key="ditem.id"><a :href="'#/Foodlist?classId='+ditem.id" >{{ditem.class_name}}</a></li>
+                            <li v-for="ditem in item.class_names" :key="ditem.id"><a :href="'#/Foodlist?classId='+ditem.id" :class="classId==ditem.id?'chosed':''" >{{ditem.class_name}}</a></li>
                         </ul>
                     </el-col>
                 </el-row>
              </el-col>
              <el-col :span="24">
                  <el-row :gutter="20" class="temCard">
-                   <el-col class="cardCol" :xs="12" :sm="8" :md="8"  v-for="item in temCardList" :key="item.id" >
+                   <el-col class="cardCol" :xs="12" :sm="8" :md="8"  v-for="item in temCardList" :key="item.id" v-if="temCardList.length>0?true:false" >
                      <el-card :body-style="{ padding: '0px' }">
-                         <a class="imgBox" href="#/Itemlist">
+                         <a class="imgBox" :href="'#/Itemlist?foodId='+item.id" target="_blank">
                               <img :src="item.img" class="image">
                          </a>
                        <div class="inner" style="padding: 15px;">
-                         <a class="title" href="#/Itemlist">{{item.name}}</a>
+                         <a class="title" :href="'#/Itemlist?foodId='+item.id" target="_blank">{{item.name}}</a>
                          <div class="bottom clearfix">
                            <span>{{item.collect}}收藏 · {{item.like}}点赞</span>
                          </div>
@@ -46,16 +46,14 @@
 </template>
 
 <script>
-// import home from './Home.vue'
 import Header from '../publicTem/Header.vue'
 import Footer from '../publicTem/Footer.vue'
-// import Foodlist from '../publicTem/temCard.vue'
 import {classList,IndexShowList,searchShowList} from '../../pubJS/server.js'
     export default {
         data() { //选项 / 数据
             return {
                 classList:'',//分类
-                temCardList:'',//最新列表
+                temCardList:[],//最新列表
                 pageId:0,//当前ID号
                 classId:'',//分类id
                 keywords:'',//关键词
@@ -66,7 +64,14 @@ import {classList,IndexShowList,searchShowList} from '../../pubJS/server.js'
             // console.log(1111);
         },
         methods: { //事件处理器
-            showSearchShowList:function(initpage){
+            showSearchShowList:function(initpage){//展示数据
+                this.classId = (this.$route.query.classId==undefined?'':parseInt(this.$route.query.classId));//获取传参的classId
+                this.keywords = this.$route.query.keywords==undefined?'':this.$route.query.keywords;//获取传参的keywords
+                // console.log(this.$route.query,this.classId,this.keywords,this.pageId,initpage);
+                if(initpage){
+                    this.pageId=0;
+                    this.temCardList = [];
+                }
                 searchShowList(this.pageId,this.keywords,this.classId,(result)=>{
                     if(result.code==1001){
                         var msg = result.data;
@@ -76,10 +81,10 @@ import {classList,IndexShowList,searchShowList} from '../../pubJS/server.js'
                         }else{
                             this.hasMore = true;
                         }
-                        if(initpage){
-                            this.temCardList = msg;
-                        }else{
+                        if(initpage==0){
                             this.temCardList = this.temCardList.concat(msg);
+                        }else{
+                            this.temCardList = msg;
                         }
                         this.pageId = msg[msg.length-1].id;
                         // console.log(this.temCardList);
@@ -88,10 +93,12 @@ import {classList,IndexShowList,searchShowList} from '../../pubJS/server.js'
                     }
                 })
             },
-            addMoreFun:function(){
+            addMoreFun:function(){//查看更多
                 this.showSearchShowList(false);
+            },
+            routeChange:function(ifif){
+                this.showSearchShowList(true);
             }
-
         },
         components: { //定义组件
             'wbc-nav': Header,//首页
@@ -99,13 +106,10 @@ import {classList,IndexShowList,searchShowList} from '../../pubJS/server.js'
         },
         watch: {
            // 如果路由有变化，会再次执行该方法
-           '$route':'addMoreFun'
+           '$route':'routeChange'
          },
         created() { //生命周期函数
-            console.log(this.$route.query.keywords);
-            this.classId = (this.$route.query.classId==undefined?'':parseInt(this.$route.query.classId));
-            this.keywords = (this.$route.query.keywords==undefined?'':this.$route.params.keywords);
-            console.log(this.classId,this.keywords);
+            // console.log(this.$route.query.keywords);
             classList((msg)=>{//分类列表
                 this.classList = msg;
             });
@@ -137,6 +141,10 @@ import {classList,IndexShowList,searchShowList} from '../../pubJS/server.js'
     line-height: 150%;
     margin-bottom:7px;
 }
+.shotSelect ul li:hover a,.shotSelect ul li a.chosed{
+    background: #A37011;
+    color:#fff;
+}
 
 .item{
     padding:3px 0;
@@ -154,7 +162,8 @@ import {classList,IndexShowList,searchShowList} from '../../pubJS/server.js'
 }
 .shotSelect ul li a{
     display: inline-block;
-    padding:5px 10px;
+    padding:4px 8px;
+    margin:2px;
     /*line-height: 28px;*/
     text-align: center;
 }

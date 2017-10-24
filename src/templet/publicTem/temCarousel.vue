@@ -1,10 +1,9 @@
 <template>
   <div class="block" >
-    <!-- <span class="demonstration">默认 Hover 指示器触发</span> -->
-    <el-carousel height="150px">
+    <el-carousel height="200px">
       <el-carousel-item v-for="item in temCarouselList" :key="item.id">
-          <a class="imgBox" href="#/Itemlist">
-               <img :src="item.img" class="image">
+          <a class="imgBox" :href="'#/Itemlist?foodId='+item.id" target="_blank">
+               <img :src="item.img" class="fitImg">
           </a>
       </el-carousel-item>
     </el-carousel>

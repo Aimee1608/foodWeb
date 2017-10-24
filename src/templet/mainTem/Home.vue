@@ -9,13 +9,13 @@
                     <TodayList></TodayList>
                 </div>
                 <div class="newList">
-                    <h1 class="listTitle">最新菜谱<a href="#/Foodlist">更多<i class="el-icon-d-arrow-right"></i></a></h1>
+                    <h1 class="listTitle">最新菜谱<a href="#/Foodlist">(更多)</a></h1>
                     <FoodlistHome></FoodlistHome>
                 </div>
                 <el-row  :gutter="50">
                     <el-col :xs="24" :sm="16">
                         <div class="hotSelect">
-                            <h1 class="listTitle">热门分类<a href="#/Select">更多<i class="el-icon-d-arrow-right"></i></a></h1>
+                            <h1 class="listTitle">热门分类<a href="#/Select">(更多)</a></h1>
                             <HotSelect></HotSelect>
                         </div>
                         <div class="hotFood" >

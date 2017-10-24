@@ -3,11 +3,11 @@
         <el-row :gutter="20" class="temCardHome">
           <el-col class="cardCol" :xs="12" :sm="6" :md="6"  v-for="item in temCardListHome" :key="item.id" >
             <el-card :body-style="{ padding: '0px' }">
-                <a class="imgBox" href="#/Itemlist">
+                <a class="imgBox" :href="'#/Itemlist?foodId='+item.id" target="_blank">
                      <img :src="item.img" class="image">
                 </a>
               <div class="inner" style="padding: 15px;">
-                <a class="title" href="#/Itemlist">{{item.name}}</a>
+                <a class="title" :href="'#/Itemlist?foodId='+item.id" target="_blank" >{{item.name}}</a>
                 <div class="bottom clearfix">
                   <span>{{item.collect}}收藏 · {{item.like}}点赞</span>
                 </div>

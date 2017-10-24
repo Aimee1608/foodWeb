@@ -1,12 +1,12 @@
 <template>
     <el-row :gutter="20">
-        <el-col class="cardCol" :xs="12" :sm="8" :md="6"  v-for="item in temTodayList" :key="item.id">
+        <el-col class="cardCol" :xs="12" :sm="6" :md="6"  v-for="item in temTodayList" :key="item.id">
             <el-card :body-style="{ padding: '0px' }">
-                <a class="imgBox" href="#/Itemlist">
+                <a class="imgBox" :href="'#/Itemlist?foodId='+item.id" target="_blank">
                      <img :src="item.img" class="image">
                 </a>
                   <div class="inner" style="padding: 15px;text-align:center">
-                    <a class="title" href="#/Itemlist">{{item.name}}</a>
+                    <a class="title" :href="'#/Itemlist?foodId='+item.id" target="_blank" >{{item.name}}</a>
                   </div>
           </el-card>
         </el-col>
@@ -30,7 +30,7 @@ import {Recommend} from '../../pubJS/server.js'
         created() { //生命周期函数
             Recommend((msg)=>{
                 this.temTodayList = msg;
-                console.log(this.temTodayList);
+                // console.log(this.temTodayList);
             })
         }
     }

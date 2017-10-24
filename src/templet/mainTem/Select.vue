@@ -7,7 +7,7 @@
                     <h1>{{item.class_name}}</h1>
                     <el-row >
                         <el-col :xs="6" :sm="3" v-for="(ditem, index) in item.class_names" :key="ditem.id">
-                            <a href="#/Foodlist">{{ditem.class_name}}</a>
+                            <a :href="'#/Foodlist?classId='+ditem.id">{{ditem.class_name}}</a>
                         </el-col>
                     </el-row>
                 </div>
