@@ -57,4 +57,8 @@ import {GetFocus} from '../../pubJS/server.js'
          width:100%;
          height:auto;
      }
+     ul.el-carousel__indicators{
+         text-align: center;
+         width:100%;
+     }
 </style>

@@ -1,7 +1,7 @@
 <template>
     <!-- <div> -->
         <el-row :gutter="20" class="temCardHome">
-          <el-col class="cardCol" :xs="12" :sm="6" :md="6"  v-for="item in temCardListHome" :key="item.id" >
+          <el-col class="cardCol el-col-xxs-24" :xs="12" :sm="6" :md="6"   v-for="item in temCardListHome" :key="item.id" >
             <el-card :body-style="{ padding: '0px' }">
                 <a class="imgBox" :href="'#/Itemlist?foodId='+item.id" target="_blank">
                      <img :src="item.img" class="image">

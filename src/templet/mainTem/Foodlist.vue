@@ -14,7 +14,7 @@
              </el-col>
              <el-col :span="24">
                  <el-row :gutter="20" class="temCard">
-                   <el-col class="cardCol" :xs="12" :sm="8" :md="8"  v-for="item in temCardList" :key="item.id" v-if="temCardList.length>0?true:false" >
+                   <el-col class="cardCol el-col-xxs-24" :xs="12" :sm="8" :md="8"  v-for="item in temCardList" :key="item.id" v-if="temCardList.length>0?true:false" >
                      <el-card :body-style="{ padding: '0px' }">
                          <a class="imgBox" :href="'#/Itemlist?foodId='+item.id" target="_blank">
                               <img :src="item.img" class="image">

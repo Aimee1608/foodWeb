@@ -319,7 +319,7 @@ import {classList} from '../../pubJS/server.js'
     width:100%;
 }
 .hideMenu ul>li{
-    width:100%;
+    /*width:100%;*/
     background:#fff;
     border-bottom: 1px solid #f1f1f1;
     padding:10px;
@@ -339,7 +339,10 @@ import {classList} from '../../pubJS/server.js'
     position: absolute;
     left:0;
     top:100%;
-    z-index: 888;
+    box-sizing: border-box;
+    z-index: 999;
+    border: 1px solid #f1f1f1;
+    box-shadow:0 2px 6px 0 rgba(0,0,0,.12),0 0 8px 0 rgba(0,0,0,.04);
     display: none;
 }
 
