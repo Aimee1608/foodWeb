@@ -1,14 +1,13 @@
 <template>
     <div class="headBack">
-        <el-row class="container">
-            <el-col :span="24">
-                <div class="headBox">
+        <div class="container">
+            <div class="headBox">
                     <span class="logoImg" >
                         <img src="src/img/logoHead.png" alt="" class="fitImg">
                     </span>
                     <ul >
                         <li >
-                            <a href="#/Home" :class="path=='/Home'?'active':''">首页</a>
+                            <a href="#/" :class="path=='/'?'active':''">首页</a>
                         </li>
                         <li>
                             <a href="#/Foodlist" :class="path=='/Foodlist'?'active':''">菜谱</a>
@@ -55,7 +54,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="mobileBox">
+            <div class="mobileBox">
                     <div class="logoBox">
                         <img src="src/img/logoHead.png" alt="" />
                     </div>
@@ -64,7 +63,7 @@
                             <i @click="clickMenu" class="el-icon-menu"></i>
                             <ul :class="pMenu?'pshow':''">
                                 <li >
-                                    <a href="#/Home" :class="path=='/Home'?'active':''">首页</a>
+                                    <a href="#/" :class="path=='/'?'active':''">首页</a>
                                 </li>
                                 <li>
                                     <a href="#/Foodlist" :class="path=='/Foodlist'?'active':''">菜谱</a>
@@ -94,8 +93,7 @@
                         </div>
                     </div>
                 </div>
-            </el-col>
-        </el-row>
+        </div>
     </div>
 </template>
 
@@ -182,7 +180,7 @@ import {classList} from '../../pubJS/server.js'
                 this.headclassList = msg;
                 this.path = this.$router.currentRoute.path;
                 // console.log(msg);
-                console.log(this.$router.currentRoute.path);
+                // console.log(this.$router.currentRoute.path);
             })
         }
     }
@@ -364,6 +362,7 @@ import {classList} from '../../pubJS/server.js'
 }
 .hideMenu ul.pshow{
     display: block;
+    /*font-size: 0;*/
 }
 
 

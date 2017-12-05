@@ -7,10 +7,10 @@
                     <a href="#/Advertising" target="_blank">广告合作</a>
                     <a href="#/Suggestion" target="_blank">意见反馈</a>
                     <a href="#/FriendsLink" target="_blank">友情链接</a>
-
                 </div>
                 <div class="Recordnumber">
-                    ©2009-2017 北京豆果信息技术有限公司 京ICP证111032号 京公网安备11010102001133号 京网文[2014]0774-174号 食品流通许可证SP1101061510252413
+                    <p>托管于<a href="https://github.com/Aimee1608/foodWeb">GitHub</a> , <a href="https://tongji.baidu.com">百度统计</a> 提供网站统计服务  ©2017 美食美荟 由 <a href="https://cn.vuejs.org/">Vue</a> 搭建,京ICP备11111号
+                    Made by Aimee</p>
                 </div>
                 <div class="">
 

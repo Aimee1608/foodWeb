@@ -11,8 +11,8 @@
                     <div class="falisc">
                         <span>{{detailsList.click}}</span>浏览
                         <span>{{detailsList.collect}}</span>收藏
-                        <span><a href="#" class="share"><i class="el-icon-share"></i>分享</a></span>
-                        <span><a href="#" class="save"><i class="el-icon-star-off"></i>收藏</a></span>
+                        <!-- <span><a href="#" class="share"><i class="el-icon-share"></i>分享</a></span> -->
+                        <!-- <span><a href="#" class="save"><i class="el-icon-star-off"></i>收藏</a></span> -->
                     </div>
                     <div class="retew">
                         <div class="auth">

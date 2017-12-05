@@ -36,7 +36,7 @@ export default {
       created() { //生命周期函数
           classList((msg)=>{
               this.selectList = msg;
-              console.log(msg);
+              // console.log(msg);
           })
       }
 }
