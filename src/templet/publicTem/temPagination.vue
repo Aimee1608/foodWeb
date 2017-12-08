@@ -26,10 +26,10 @@
         },
         methods: { //事件处理器
             handleSizeChange(val) {
-               console.log(`每页 ${val} 条`);
+               // console.log(`每页 ${val} 条`);
              },
              handleCurrentChange(val) {
-               console.log(`当前页: ${val}`);
+               // console.log(`当前页: ${val}`);
                this.$emit('sendNum',val);//子组件向父组件传参
              }
         },

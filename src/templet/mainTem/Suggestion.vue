@@ -9,15 +9,28 @@
                 </p>
                 <div class="inputBox">
                     <span>Email:</span>
-                    <el-input v-model="input" placeholder="请输入内容"></el-input>
+                    <el-input v-model="input" placeholder="请输入邮箱"></el-input>
+                    <el-alert :class="emailshow?'show':''"
+                       title="邮箱格式错误"
+                       type="error"
+                       show-icon
+                        :closable="false"
+                       >
+                     </el-alert>
                 </div>
-                <div class="inputBox">
+                <div class="inputBox" >
                     <span>意见:</span>
                     <el-input type="textarea" :rows="5" placeholder="请输入内容" v-model="textarea"></el-input>
+                    <el-alert :class="textshow?'show':''"
+                       title="内容不能为空"
+                       type="error"
+                       show-icon
+                        :closable="false"
+                       >
+                     </el-alert>
                     <div class="">
-                        <el-button type="primary">发送</el-button>
+                        <el-button type="primary"  @click="sendSug">发送</el-button>
                     </div>
-
                 </div>
             </el-col>
         </el-row>
@@ -32,7 +45,36 @@ export default {
     data (){
         return{
             input:'',
-            textarea:""
+            textarea:"",
+            emailshow: false,
+            textshow: false
+        }
+    },
+    methods:{
+        sendSug:function(){
+            var that = this;
+            var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/ ;
+            if(reg.test(that.input)&&that.textarea){
+                console.log(that.input,that.textarea);
+                that.emailshow = false;
+                that.textshow = false;
+                that.input = "";
+                that.textarea = "";
+                this.$message({
+                    message: '恭喜你，这是一条成功消息',
+                    type: 'success'
+                 });
+            }else if(!reg.test(that.input)&&that.textarea){
+                that.emailshow = true;
+                that.textshow = false;
+            }else if(reg.test(that.input)&&!that.textarea){
+                that.textshow = true;
+                that.emailshow = false;
+            }else{
+                that.emailshow = true;
+                that.textshow = true;
+
+            }
         }
     },
     components: {
@@ -57,10 +99,25 @@ export default {
         position: relative;
         margin-bottom: 30px;
     }
-    .suggestionBox .inputBox .el-input,.suggestionBox .inputBox .el-textarea{
+    .suggestionBox .inputBox .el-input,.suggestionBox .inputBox .el-textarea,.suggestionBox .inputBox .el-alert{
         padding-left: 50px;
         width:80%;
         box-sizing: border-box;
+    }
+    .suggestionBox .inputBox .el-input input{
+        border-radius: 4px;
+    }
+    .suggestionBox .inputBox .el-alert{
+        background: transparent;
+        color:#ff4949;
+        display: none;
+    }
+    .suggestionBox .inputBox .el-alert.show{
+        display: block;
+    }
+    .suggestionBox .inputBox .el-alert i{
+        color: #ff4949;
+
     }
     .suggestionBox .inputBox>span{
         position: absolute;

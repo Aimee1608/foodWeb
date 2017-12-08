@@ -9,9 +9,8 @@
                     <p>{{listName[index]}}<a :href="'#/Foodlist?keywords='+item.name" target="_blank">更多>></a></p>
                 </el-col>
                 <el-col :span="4" v-for="(ditem,i) in item.data" :key="ditem.id" v-if="i<=2&&i<item.data.length-1?true:false">
-                    <img class="fitImg" :src="item.data[i+1].img" alt="">
+                    <a :href="'#/Itemlist?foodId='+item.data[i+1].id" target="_blank"><img class="fitImg" :src="item.data[i+1].img" alt=""></a>
                 </el-col>
-
             </el-row>
         </el-col>
     </el-row>
@@ -35,12 +34,12 @@ import {searchShowList} from '../../pubJS/server.js'
                 if(this.listName.length>0){
                     for(var i=0;i<this.listName.length;i++){
                         var fname = this.listName[i];
-                        console.log(fname);
+                        // console.log(fname);
                         searchShowList(0,fname,'',(result)=>{
                                 if(result.code==1001){
-                                    console.log(fname);
+                                    // console.log(fname);
                                     this.temHotFoodList = this.temHotFoodList.concat({name:fname,data:result.data});
-                                    console.log(this.temHotFoodList)
+                                    // console.log(this.temHotFoodList)
                                 }
                         })
                     }

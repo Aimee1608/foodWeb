@@ -130,7 +130,7 @@ import {classList} from '../../pubJS/server.js'
 
             },
             querySearch(queryString, cb) {//快速选择
-                console.log(queryString,cb,this.$router.query);
+                // console.log(queryString,cb,this.$router.query);
                 var restaurants = this.restaurants;
                 var results = queryString ? restaurants.filter(this.createFilter(queryString)) : restaurants;
                 // 调用 callback 返回建议列表的数据

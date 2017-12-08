@@ -12,7 +12,7 @@
                   <span>{{item.collect}}收藏 · {{item.like}}点赞</span>
                 </div>
                 <div class="photo">
-                    <img src="src/img/cai02.png" alt="">
+                    <img :src="item.headimgurl" alt="">
                     <p>{{item.author}}</p>
                 </div>
               </div>
@@ -39,7 +39,7 @@ import {IndexShowList} from '../../pubJS/server.js'
         created() { //生命周期函数
             IndexShowList(0,(msg)=>{
                 this.temCardListHome = msg;
-                console.log(this.temCardListHome);
+                // console.log(this.temCardListHome);
             })
         }
     }
@@ -67,12 +67,12 @@ color: #999;
     width:82px;
 }
 .temCardHome .photo img{
-    background:#999;
+    background:#fff;
     width:46px;
     height:46px;
     border: 2px solid #fff;
     border-radius: 50%;
-    padding:5px;
+    /*padding:5px;*/
 }
 
 .temCardHome .bottom {

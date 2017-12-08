@@ -26,7 +26,7 @@ import {classList} from '../../pubJS/server.js'
         created() { //生命周期函数
             classList((msg)=>{
                 this.headclassList = msg[0].class_names.concat(msg[1].class_names)
-                // console.log(msg);
+                console.log(msg);
             })
         }
     }

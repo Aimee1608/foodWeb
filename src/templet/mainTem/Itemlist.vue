@@ -16,7 +16,7 @@
                     </div>
                     <div class="retew">
                         <div class="auth">
-                            <img src="src/img/tou.png" alt="">
+                            <img :src="detailsList.headimgurl" alt="">
                             <span>{{detailsList.author}}</span>
                             <span>2017-10-17</span>
                         </div>
@@ -34,7 +34,6 @@
             						<td width="50%"><h3 class="zfliao">食材</h3></td>
             						<td class="relative"></td>
     					    </tr>
-
     					     <tr width="50%"  v-for="(item,index) in detailsList.inventory" :key="index" v-if="index%2==0?true:false">
                                  <td class="lirre" >
                                      <span>{{item.food_name}}</span><span class='right'>{{item.food_how}}</span>
@@ -157,7 +156,7 @@ export default {
    created() { //生命周期函数
       this.foodId = (this.$route.query.foodId==undefined?'':parseInt(this.$route.query.foodId));//获取传参的foodId
        FoodInfoData(this.foodId,(msg)=>{
-        //    console.log(msg)
+           console.log(msg)
            this.detailsList = msg;
        });
 
@@ -232,7 +231,7 @@ export default {
     width:36px;
     height:36px;
     border-radius: 50%;
-    border:1px solid #666;
+    /*border:1px solid #666;*/
     margin-right:15px;
     vertical-align: top;
 }

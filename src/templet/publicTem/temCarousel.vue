@@ -27,7 +27,7 @@ import {GetFocus} from '../../pubJS/server.js'
         created() { //生命周期函数
             GetFocus((msg)=>{
                 this.temCarouselList = msg;
-                console.log(this.temCardList);
+                // console.log(this.temCardList);
             })
         }
     }
