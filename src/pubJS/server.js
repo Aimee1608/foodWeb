@@ -107,4 +107,16 @@ const FoodInfoData = (foodId,callback) =>{
     })
 }
 
-export  {GetFocus,Recommend,IndexShowList,classList,searchShowList,FoodInfoData}
+//意见反馈
+const suggestionBack = (email,content,callback) => {
+    let url = portUrl + "food/GetLeave?email="+email+"&content="+content;
+    Vue.http.post(url).then(response => response.json()).then(num => {
+        // console.log(num);
+        if(num.code==1001){
+            callback && callback(num)
+        }else{
+            alert("查询失败")
+        }
+    })
+}
+export  {GetFocus,Recommend,IndexShowList,classList,searchShowList,FoodInfoData,suggestionBack}

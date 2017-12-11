@@ -5,11 +5,11 @@
             <el-col :span="24">
                 <h1 class="pageTitle">意见反馈</h1>
                 <p>
-                    您有什么问题或建议想对我们说？
+                    您有什么问题或建议想对我们说？<邮箱>shuigongqian@sina.com
                 </p>
                 <div class="inputBox">
                     <span>Email:</span>
-                    <el-input v-model="input" placeholder="请输入邮箱"></el-input>
+                    <el-input type="email" v-model="input" placeholder="请输入邮箱"></el-input>
                     <el-alert :class="emailshow?'show':''"
                        title="邮箱格式错误"
                        type="error"
@@ -41,6 +41,7 @@
 <script>
 import Header from '../publicTem/Header.vue'
 import Footer from '../publicTem/Footer.vue'
+import {suggestionBack} from '../../pubJS/server.js'
 export default {
     data (){
         return{
@@ -51,6 +52,7 @@ export default {
         }
     },
     methods:{
+        //意见反馈提交
         sendSug:function(){
             var that = this;
             var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/ ;
@@ -58,12 +60,18 @@ export default {
                 console.log(that.input,that.textarea);
                 that.emailshow = false;
                 that.textshow = false;
-                that.input = "";
-                that.textarea = "";
-                this.$message({
-                    message: '恭喜你，这是一条成功消息',
-                    type: 'success'
-                 });
+                 // location="mailto:shuigongqian@sina.com?cc="+that.input+"&subject=意见反馈&body="+that.textarea;
+                 suggestionBack(that.input,that.textarea,function(msg){
+                     // console.log(msg);
+                     that.input = "";
+                     that.textarea = "";
+                     that.$message({
+                         message: '恭喜你，这是一条成功消息',
+                         type: 'success'
+                      });
+                 })
+
+
             }else if(!reg.test(that.input)&&that.textarea){
                 that.emailshow = true;
                 that.textshow = false;

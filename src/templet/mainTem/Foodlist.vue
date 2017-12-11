@@ -25,7 +25,7 @@
                            <span>{{item.collect}}收藏 · {{item.like}}点赞</span>
                          </div>
                          <div class="photo">
-                             <img :src="item.headimgurl" alt="">
+                             <img :src="item.headimgurl"  onerror="this.onerror=null;this.src='src/img/tou.png'">
                              <p>{{item.author}}</p>
                          </div>
                        </div>

@@ -7,6 +7,7 @@
                     <h1>{{item.class_name}}</h1>
                     <el-row >
                         <el-col :xs="6" :sm="3" v-for="(ditem, index) in item.class_names" :key="ditem.id">
+                            <img class="fitImg" :src="ditem.image"  onerror="this.onerror=null;this.src='src/img/logo.png'"/>
                             <a :href="'#/Foodlist?classId='+ditem.id">{{ditem.class_name}}</a>
                         </el-col>
                     </el-row>
@@ -36,7 +37,7 @@ export default {
       created() { //生命周期函数
           classList((msg)=>{
               this.selectList = msg;
-              // console.log(msg);
+              console.log(msg);
           })
       }
 }
@@ -55,8 +56,18 @@ export default {
     margin-bottom:8px;
     font-weight: bold;
 }
+.selectList .el-col{
+    padding:10px;
+    text-align: center;
+    /*background: #fff;*/
+}
+.selectList .el-col img{
+    height:60px;
+    margin-bottom: 10px;
+    /*max-height: 80px;*/
+}
 .selectList a{
-    padding:3px 4px;
+    padding:3px 5px;
     display: inline-block;
 }
 .selectList a:hover{
