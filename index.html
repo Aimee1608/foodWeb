@@ -28,13 +28,13 @@
     <script src="dist/build.js"></script>
     <script type="http://aimee.qlh6.cn/wx_share/js/wx_share.js"></script>
     <script type="text/javascript">
-        document.addEventListener("WeixinJSBridgeReady", function () {
+        document.onload = function () {
             var wxShare = new WxShare({ //微信自定义分享功能
                 title:'美食美荟', //分享标题
                 desc:'你的美味生活！',//分享描述
                 img:'dist/share.jpg'//分享图片
             });
-        }, false);
+        };
     </script>
   </body>
 </html>
