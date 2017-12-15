@@ -34,22 +34,24 @@ module.exports = {
      {
 
         test: /\.css$/,
-
         loader: "style-loader!css-loader",
-
-        },{
+        // options: {
+        //     name: '[name].[ext]?[hash]'
+        // }
+    },
+    {
 
         test: /\.less$/,
-
         loader: "style-loader!css-loader!less-loader",
 
-        },{
-          test: /\.(png|jpg|gif|svg|woff|ttf|eot|woff2)$/,
-          loader: 'file-loader',
-          options: {
+    },
+    {
+        test: /\.(png|jpg|gif|svg|woff|ttf|eot|woff2)$/,
+        loader: 'file-loader',
+        options: {
             name: '[name].[ext]?[hash]'
-          }
-        },
+        }
+    },
     ]
   },
   resolve: {
