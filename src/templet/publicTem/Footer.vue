@@ -9,11 +9,8 @@
                     <a href="#/FriendsLink" target="_blank">友情链接</a>
                 </div>
                 <div class="Recordnumber">
-                    <p>托管于<a href="https://github.com/Aimee1608/foodWeb">GitHub</a> , <a href="https://tongji.baidu.com">百度统计</a> 提供网站统计服务  ©2017 美食美荟 由 <a href="https://cn.vuejs.org/">Vue</a> 搭建,京ICP备11111号
+                    <p>托管于<a href="https://github.com/Aimee1608/foodWeb">GitHub</a> , <a href="https://tongji.baidu.com">百度统计</a> 提供网站统计服务  ©2017 美食美荟 由 <a href="https://cn.vuejs.org/">Vue</a> 搭建,京ICP备17071595号
                     Made by Aimee</p>
-                </div>
-                <div class="">
-
                 </div>
             </el-col>
         </el-row>
