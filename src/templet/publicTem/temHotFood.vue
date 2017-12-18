@@ -6,7 +6,7 @@
                     <a :href="'#/Itemlist?foodId='+item.data[0].id" target="_blank"><img class="fitImg" :src="item.data[0].img" alt=""></a>
                 </el-col>
                 <el-col :span="8">
-                    <p>{{listName[index]}}<a :href="'#/Foodlist?keywords='+item.name" target="_blank">更多>></a></p>
+                    <p>{{listName[index]}}<a :href="'#/Foodlist?keywords='+listName[index]" target="_blank">更多>></a></p>
                 </el-col>
                 <el-col :span="4" v-for="(ditem,i) in item.data" :key="ditem.id" v-if="i<=2&&i<item.data.length-1?true:false">
                     <a :href="'#/Itemlist?foodId='+item.data[i+1].id" target="_blank"><img class="fitImg" :src="item.data[i+1].img" alt=""></a>
