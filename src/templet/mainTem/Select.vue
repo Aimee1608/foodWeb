@@ -59,8 +59,9 @@ export default {
     font-weight: bold;
 }
 .selectList .el-col{
-    padding:10px;
+    padding:10px 10px 0 10px;
     text-align: center;
+    min-height:140px;
     /*background: #fff;*/
 }
 .selectList .el-col img{

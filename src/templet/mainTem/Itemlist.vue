@@ -48,7 +48,7 @@
                             <h2>{{detailsList.name}}</h2>
                             <el-row class="stepcont" :gutter="15" v-for="(item,index) in detailsList.step" :key="index">
                                 <el-col :span="9" class="thumbnailImg">
-                                    <img :src="detailsList.thumbnail[index]" alt="" class="fitImg">
+                                    <img :src="detailsList.thumbnail[index]?detailsList.thumbnail[index]:detailsList.img" alt="" onerror="this.onerror=null;this.src='src/img/tou.png'" class="fitImg">
                                 </el-col>
                                 <el-col :span="15">
                                     <p>
