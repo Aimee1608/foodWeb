@@ -1,22 +1,19 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
-import VueResource from 'vue-resource'
-// import VueLess from 'less-loader'
+import App from './App'
+import router from './router'
 import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-default/index.css'
-import routes from './routes.js'
-import './css/style.css'
+// import 'element-ui/lib/theme-default/index.css'
+import 'element-ui/lib/theme-chalk/index.css'
+import '@/assets/css/style.css'
+import '@/networks/init'
 
-Vue.use(VueRouter)
-Vue.use(VueResource)
+Vue.config.productionTip = false
 Vue.use(ElementUI)
-// Vue.use(VueLess)
 
-const router = new VueRouter({
-    routes
-})
-
-var vm = new Vue({
+/* eslint-disable no-new */
+new Vue({
   el: '#app',
   router,
+  components: { App },
+  template: '<App/>'
 })
