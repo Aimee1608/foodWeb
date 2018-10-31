@@ -3,13 +3,13 @@
         <el-col :span="24"  v-for="(item, index) in temHotFoodList" :key="index">
             <el-row :gutter="10"  class="smallImg">
                 <el-col :span="4" >
-                    <a :href="'#/Itemlist?foodId='+item.data[0].id" target="_blank"><img class="fitImg" :src="item.data[0].img" alt=""></a>
+                    <router-link :to="{name: 'Itemlist', params:{foodId: item.data[0].id}}" target="_blank"><img class="fitImg" :src="item.data[0].img" alt=""></router-link>
                 </el-col>
                 <el-col :span="8">
-                    <p>{{listName[index]}}<a :href="'#/Foodlist?keywords='+listName[index]" target="_blank">更多>></a></p>
+                    <p>{{listName[index]}}<router-link :to="{name: 'Foodlist', params: {keywords: listName[index], classId: 0}}" target="_blank">更多>></router-link></p>
                 </el-col>
                 <el-col :span="4" v-for="(ditem,i) in item.data" :key="ditem.id" v-if="i<=2&&i<item.data.length-1?true:false">
-                    <a :href="'#/Itemlist?foodId='+item.data[i+1].id" target="_blank"><img class="fitImg" :src="item.data[i+1].img" alt=""></a>
+                    <router-link :to="{name: 'Itemlist', params:{foodId: item.data[i+1].id}}" target="_blank"><img class="fitImg" :src="item.data[i+1].img" alt=""></router-link>
                 </el-col>
             </el-row>
         </el-col>
@@ -34,20 +34,16 @@ export default {
         if (this.listName.length > 0) {
           for (var i = 0; i < this.listName.length; i++) {
             var fname = this.listName[i]
-            console.log(fname);
             const response = await FoodApi.searchShowList({
                 pageId: 0, 
                 classId: 0, 
                 name: this.listName[i]
               })
-              console.log(response)
             if (response.data.code == 1001) {
-              // console.log(fname);
               this.temHotFoodList = this.temHotFoodList.concat({
                 name: fname,
                 data: response.data.data
               })
-              // console.log(this.temHotFoodList)
             }
         }
         }

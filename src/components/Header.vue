@@ -2,111 +2,114 @@
     <div class="headBack">
         <div class="container">
             <div class="headBox">
-                    <span class="logoImg" >
-                        <img src="../assets/img/logoHead.png" alt="" class="fitImg">
-                    </span>
-                    <ul >
-                        <li >
-                            <router-link to="/"  :class="path=='/'?'active':''">首页</router-link>
-                        </li>
-                        <li>
-                            <router-link to="/Foodlist" :class="path=='/Foodlist'?'active':''">菜谱</router-link>
-                        </li>
-                        <li >
-                            <router-link to="/Select" @mouseover.native="hoverFun" @mouseout.native="leaveFun" :class="path=='/Select'?'active':''" >分类 <i :class="isOpen?'el-icon-caret-top':'el-icon-caret-bottom'"></i></router-link>
-                            <div :class="isOpen?'selectBoxShow show':'selectBoxShow'"  @mouseover="hoverFun" @mouseout="leaveFun" >
-                                <el-row  class="selectBox" :gutter="10" v-for="(item, index) in headclassList" :key="item.id" v-if="index<=3?true:false" >
-                                    <el-col :span="6" class="smalltitle" >
-                                        {{item.class_name}}
-                                    </el-col>
-                                    <el-col :span="18">
-                                        <el-row :gutter="10">
-                                            <el-col :span="8" v-for="ditem in item.class_names" :key="ditem.id">
-                                                <router-link  :to="'/Foodlist?classId='+ditem.id" >{{ditem.class_name}}</router-link>
-                                            </el-col>
-                                        </el-row>
-                                    </el-col>
+                  <span class="logoImg" >
+                      <img src="../assets/img/logoHead.png" alt="" class="fitImg">
+                  </span>
+                  <ul >
+                      <li >
+                          <router-link to="/"  :class="$route.name=='Home'?'active':''">首页</router-link>
+                      </li>
+                      <li>
+                          <router-link to="/Foodlist" :class="$route.name=='Foodlist'?'active':''">菜谱</router-link>
+                      </li>
+                      <li >
+                          <router-link to="/Select" @mouseover.native="hoverFun" @mouseout.native="leaveFun" :class="$route.name=='Select'?'active':''" >分类 <i :class="isOpen?'el-icon-caret-top':'el-icon-caret-bottom'"></i></router-link>
+                          <div :class="isOpen?'selectBoxShow show':'selectBoxShow'"  @mouseover="hoverFun" @mouseout="leaveFun" >
+                              <el-row  class="selectBox" :gutter="10" v-for="(item, index) in headclassList" :key="item.id" v-if="index<=3" >
+                                  <el-col :span="6" class="smalltitle" >
+                                      {{item.class_name}}
+                                  </el-col>
+                                  <el-col :span="18">
+                                      <el-row :gutter="10">
+                                          <el-col :span="8" v-for="ditem in item.class_names" :key="ditem.id">
+                                              <router-link  :to="{name: 'Foodlist', params: {classId: ditem.id}}" >{{ditem.class_name}}</router-link>
+                                          </el-col>
+                                      </el-row>
+                                  </el-col>
+                              </el-row>
+                              <div class="selectMore">
+                                  <router-link to="/Select">查看更多</router-link>
+                              </div>
+                          </div>
+                      </li>
+                      <li>
+                          <router-link to="/Hotnews" :class="$route.name=='Hotnews'?'active':''">热门文章</router-link>
+                      </li>
+                      <li class="noPadSearch">
+                          <div class="searchBox">
+                              <el-row class="demo-autocomplete">
+                                  <el-col >
+                                    <el-autocomplete
+                                      class="inline-input"
+                                      popper-class="my-autocomplete"
+                                      v-model="state"
+                                      :fetch-suggestions="querySearch"
+                                      placeholder="请输入内容"
+                                      :clearable="true"
+                                      @keyup.enter.native="handlesearchSelect"
+                                      @clear="handlesearchSelect"
+                                      @select="handlesearchSelect">
+                                      <!-- <i
+                                        class="el-icon-search el-input__icon"
+                                        slot="suffix"
+                                        @click="handlesearchSelect">
+                                      </i> -->
+                                    </el-autocomplete>
+                                  </el-col>
                                 </el-row>
-                                <div class="selectMore">
-                                    <router-link to="/Select">查看更多</router-link>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <router-link to="/Hotnews" :class="path=='/Hotnews'?'active':''">热门文章</router-link>
-                        </li>
-                        <li class="noPadSearch">
-                            <div class="searchBox">
-                                <el-row class="demo-autocomplete">
-                                    <el-col >
-                                      <el-autocomplete
-                                        class="inline-input"
-                                        popper-class="my-autocomplete"
-                                        v-model="state"
-                                        :fetch-suggestions="querySearch"
-                                        placeholder="请输入内容"
-                                        @select="handlesearchSelect">
-                                        <i
-                                          class="el-icon-search el-input__icon"
-                                          slot="suffix"
-                                          @click="handleIconClick">
-                                        </i>
-                                      </el-autocomplete>
-                                    </el-col>
-                                  </el-row>
-                            </div>
-                        </li>
-                    </ul>
+                          </div>
+                      </li>
+                  </ul>
                 </div>
             <div class="mobileBox">
-                    <div class="logoBox">
-                        <img src="../assets/img/logoHead.png" alt="" />
-                    </div>
-                    <div class="hideMenu">
-
-                            <i @click="clickMenu" class="el-icon-menu"></i>
-                            <ul :class="pMenu?'pshow':''">
-                                <li >
-                                    <router-link to="/" :class="path=='/'?'active':''">首页</router-link>
-                                </li>
-                                <li>
-                                    <router-link to="/Foodlist" :class="path=='/Foodlist'?'active':''">菜谱</router-link>
-                                </li>
-                                <li >
-                                    <router-link to="/Select" :class="path=='/Select'?'active':''">分类</router-link>
-                                </li>
-                                <li>
-                                    <router-link to="/Hotnews" :class="path=='/Hotnews'?'active':''">热门文章</router-link>
-                                </li>
-                            </ul>
-
-                        <div class="searchBox">
-                            <el-row class="demo-autocomplete">
-                                <el-col >
-                                  <el-autocomplete
-                                    class="inline-input"
-                                    popper-class="my-autocomplete"
-                                    v-model="state"
-                                    :fetch-suggestions="querySearch"
-                                    placeholder="请输入内容"
-                                    @select="handlesearchSelect">
-                                    <i
-                                      class="el-icon-search el-input__icon"
-                                      slot="suffix"
-                                      @click="handleIconClick">
-                                    </i>
-                                  </el-autocomplete>
-                                </el-col>
-                              </el-row>
-                        </div>
-                    </div>
-                </div>
+              <div class="logoBox">
+                  <img src="../assets/img/logoHead.png" alt="" />
+              </div>
+              <div class="hideMenu">
+                  <i @click="clickMenu" class="el-icon-menu"></i>
+                  <ul :class="pMenu?'pshow':''">
+                      <li >
+                          <router-link to="/" :class="$route.name=='Home'?'active':''">首页</router-link>
+                      </li>
+                      <li>
+                          <router-link to="/Foodlist" :class="$route.name=='Foodlist'?'active':''">菜谱</router-link>
+                      </li>
+                      <li >
+                          <router-link to="/Select" :class="$route.name=='Select'?'active':''">分类</router-link>
+                      </li>
+                      <li>
+                          <router-link to="/Hotnews" :class="$route.name=='Hotnews'?'active':''">热门文章</router-link>
+                      </li>
+                  </ul>
+                  <div class="searchBox">
+                      <el-row class="demo-autocomplete">
+                          <el-col >
+                            <el-autocomplete
+                              class="inline-input"
+                              popper-class="my-autocomplete"
+                              v-model="state"
+                              :fetch-suggestions="querySearch"
+                              placeholder="请输入内容"
+                              clearable
+                              @keyup.enter.native="handlesearchSelect"
+                              :clear="handlesearchSelect"
+                              @select="handlesearchSelect">
+                              <i
+                                class="el-icon-search el-input__icon"
+                                slot="suffix"
+                                @click="handlesearchSelect">
+                              </i>
+                            </el-autocomplete>
+                          </el-col>
+                        </el-row>
+                  </div>
+              </div>
+          </div>
         </div>
     </div>
 </template>
 
 <script>
-// import { classList } from '@/networks/api/index'
 import FoodApi from '@/networks/api'
 export default {
   data () {
@@ -121,7 +124,6 @@ export default {
       pMenu: false
     }
   },
-  watch: {},
   methods: {
     // 事件处理器
     hoverFun: function () {
@@ -169,28 +171,18 @@ export default {
       ]
     },
     handlesearchSelect (item) {
-      // console.log(item.value);
+      console.log(item.value);
       if (this.state != "" && this.state != undefined && this.state != null) {
-        this.$router.push({ path: "/Foodlist?keywords=" + this.state })
-      }
-    },
-    handleIconClick (ev) {
-      // console.log(this.state);
-      if (this.state != "" && this.state != undefined && this.state != null) {
-        this.$router.push({ path: "/Foodlist?keywords=" + this.state })
+        this.$router.push({ name: 'Foodlist', params: {keywords: this.state, classId: 0}})
       }
     }
   },
   mounted () {
     this.restaurants = this.loadAll()
   },
-  components: {
-    // 定义组件
-  },
   async created () {
     // 生命周期函数
-    try {
-      this.path = this.$router.currentRoute.path
+    try { 
       const response = await FoodApi.classList() 
       // console.log('======', response)
       if (response.data.code == 1001) {

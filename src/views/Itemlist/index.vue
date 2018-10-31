@@ -46,7 +46,7 @@
                       <h2>{{detailsList.name}}</h2>
                       <el-row class="stepcont" :gutter="15" v-for="(item,index) in detailsList.step" :key="index">
                           <el-col :span="9" class="thumbnailImg">
-                              <img :src="detailsList.thumbnail[index]?detailsList.thumbnail[index]:detailsList.img" alt="" onerror="this.onerror=null;this.src='src/img/tou.png'" class="fitImg">
+                              <img :src="detailsList.thumbnail[index]?detailsList.thumbnail[index]:detailsList.img" alt="" onerror="this.onerror=null;this.src='../../assets/img/tou.png'" class="fitImg">
                           </el-col>
                           <el-col :span="15">
                               <p>
@@ -80,20 +80,20 @@
                   <ul class="clearfix">
                       <el-row :gutter="20">
                           <el-col :span="9">
-                                <router-link :to="'/Itemlist?foodId='+topFood.fid" target="_blank"><img class="fitImg" :src="topFood.fimg" :alt="topFood.fname"></router-link>
+                                <router-link :to="{name: 'Itemlist', params: {foodId: topFood.fid}}" target="_blank"><img class="fitImg" :src="topFood.fimg" :alt="topFood.fname"></router-link>
                           </el-col>
                           <el-col :span="15">
-                              <router-link  :to="'/Itemlist?foodId='+topFood.fid" target="_blank">{{topFood.fname}}</router-link>
+                              <router-link  :to="{name: 'Itemlist', params: {foodId: topFood.fid}}" target="_blank">{{topFood.fname}}</router-link>
                               <p></p>
                           </el-col>
                       </el-row>
-                  <li :class="index==0?'btnone':''" v-for="(item, index) in topFood.flist" :key="item.fid"><router-link :to="'/Itemlist?foodId='+item.fid" target="_blank">{{item.fname}}</router-link></li>
+                  <li :class="index==0?'btnone':''" v-for="(item, index) in topFood.flist" :key="item.fid"><router-link :to="{name: 'Itemlist', params: {foodId: item.fid}}"  target="_blank">{{item.fname}}</router-link></li>
                 </ul>
               </div>
               <div class="topSearch">
                   <h2>人气搜索</h2>
                   <ul class="clearfix">
-                      <li  v-for="(item, index) in topSearchList" :key="item" :class="index%2==0?'':'brone'"><router-link :to="'/Foodlist?keywords='+item" target="_blank">{{item}}</router-link></li>
+                      <li  v-for="(item, index) in topSearchList" :key="item" :class="index%2==0?'':'brone'"><router-link :to="{name: 'Foodlist', params: {keywords: item, classId: 0}}" target="_blank">{{item}}</router-link></li>
                   </ul>
               </div>
           </el-col>
@@ -125,7 +125,7 @@ export default {
         fid: 40,
         fname: '老干妈烧带鱼',
         fimg:
-          'https://h5php.xingyuanauto.com/food/public/upload/uploads/20170918/b6238c0ba73a986eeceba68ac5c456e5.jpg',
+          'https://www.qinlh.com/Food/public/upload/uploads/20170918/b6238c0ba73a986eeceba68ac5c456e5.jpg',
         flist: [
           {fid: 48, fname: '酸辣白菜帮'},
           {fid: 47, fname: '虎皮尖椒'},
@@ -140,6 +140,11 @@ export default {
       }
     }
   },
+  metaInfo() {
+    return {
+      title: this.detailsList.name
+    }
+  },
   methods: {},
   components: {
     // 子组件
@@ -147,7 +152,7 @@ export default {
   async created () {
     // 生命周期函数
     try {
-      this.foodId = this.$route.query.foodId ? parseInt(this.$route.query.foodId) : ''
+      this.foodId = this.$route.params.foodId ? parseInt(this.$route.params.foodId) : ''
       const response = await FoodApi.FoodInfoData({
         id: this.foodId
       })

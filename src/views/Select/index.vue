@@ -6,8 +6,8 @@
                   <h1>{{item.class_name}}</h1>
                   <el-row >
                       <el-col :xs="6" :sm="3" v-for="(ditem, index) in item.class_names" :key="ditem.id">
-                          <router-link :to="'/Foodlist?classId='+ditem.id">
-                              <img class="fitImg" :src="ditem.image"  onerror="this.onerror=null;this.src='src/img/logo.png'"/>
+                          <router-link :to="{name: 'Foodlist', params: {classId: ditem.id}}">
+                              <img class="fitImg" :src="ditem.image"  onerror="this.onerror=null;this.src='../../assets/img/logo.png'"/>
                               <i >{{ditem.class_name}}</i>
                           </router-link>
                       </el-col>
@@ -26,6 +26,9 @@ export default {
     return {
       selectList: ""
     }
+  },
+  metaInfo: {
+    title: '分类'
   },
   components: {
 

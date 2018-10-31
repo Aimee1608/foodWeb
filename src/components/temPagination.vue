@@ -1,7 +1,6 @@
 <template>
     <el-row class="block">
         <el-col :xs="24" :sm="24" :md="24" >
-            <!-- <span class="demonstration">显示总数</span> -->
             <el-pagination
               @size-change="handleSizeChange"
               @current-change="handleCurrentChange"

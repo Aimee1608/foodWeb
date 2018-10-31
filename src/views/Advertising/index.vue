@@ -17,6 +17,9 @@ export default {
   data () {
     return {}
   },
+   metaInfo: {
+    title: '广告合作'
+  },
   components: {
 
   }

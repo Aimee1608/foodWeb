@@ -45,13 +45,15 @@ export default {
       textshow: false
     }
   },
+  metaInfo: {
+    title: '意见反馈'
+  },
   methods: {
     //意见反馈提交
     async sendSug () {
       try {
         var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/
         if (reg.test(this.input) && this.textarea) {
-          console.log(this.input, this.textarea)
           this.emailshow = false
           this.textshow = false
           // location="mailto:shuigongqian@sina.com?cc="+this.input+"&subject=意见反馈&body="+this.textarea;

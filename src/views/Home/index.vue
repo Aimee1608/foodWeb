@@ -7,13 +7,13 @@
                 <TodayList></TodayList>
             </div>
             <div class="newList">
-                <h1 class="listTitle">最新菜谱<a href="#/Foodlist">(更多)</a></h1>
+                <h1 class="listTitle">最新菜谱<router-link :to="{name: 'Foodlist', params: {classId: 0}}">(更多)</router-link ></h1>
                 <FoodlistHome></FoodlistHome>
             </div>
             <el-row  :gutter="50">
                 <el-col :xs="24" :sm="16">
                     <div class="hotSelect">
-                        <h1 class="listTitle">热门分类<a href="#/Select">(更多)</a></h1>
+                        <h1 class="listTitle">热门分类<router-link to="/Select">(更多)</router-link></h1>
                         <HotSelect></HotSelect>
                     </div>
                     <div class="hotFood" >
@@ -58,7 +58,9 @@ export default {
   name: "Home",
   data () {
     //选项 / 数据
-    return {}
+    return {
+        myTitle: '标题'
+    }
   },
   methods: {
     //事件处理器

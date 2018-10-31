@@ -106,6 +106,9 @@ export default {
   data () {
     return {}
   },
+  metaInfo: {
+    title: '热门文章'
+  },
   components: {
 
   }

@@ -15,11 +15,11 @@
             </p>
             <div class="erwm">
                 <p>美食美荟还有微信公众号，提供了丰富的内容，可关注下方公众号，参与精彩活动！</p>
-                <img src="src/img/erwm.jpg" alt="">
+                <img src="../../assets/img/erwm.jpg" alt="">
             </div>
             <div class="erwm">
                 <p>美食美荟————微信小程序，先有收藏点赞、发布菜谱等功能。方便使用，便于管理自己的菜谱！</p>
-                <img src="src/img/xiaocx.jpg" alt="">
+                <img src="../../assets/img/xiaocx.jpg" alt="">
             </div>
         </el-col>
     </el-row>
@@ -29,6 +29,9 @@
 export default {
   data () {
     return {}
+  },
+  metaInfo: {
+    title: '关于'
   },
   components: {
 

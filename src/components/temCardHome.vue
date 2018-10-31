@@ -3,16 +3,16 @@
         <el-row :gutter="20" class="temCardHome">
           <el-col class="cardCol el-col-xxs-24" :xs="12" :sm="6" :md="6"   v-for="item in temCardListHome" :key="item.id" >
             <el-card :body-style="{ padding: '0px' }">
-                <router-link class="imgBox" :to="'/Itemlist?foodId='+item.id" target="_blank">
+                <router-link class="imgBox" :to="{name: 'Itemlist', params:{foodId: item.id}}" target="_blank">
                      <img :src="item.img" class="image">
                 </router-link>
               <div class="inner" style="padding: 15px;">
-                <router-link class="title" :to="'/Itemlist?foodId='+item.id" target="_blank" >{{item.name}}</router-link>
+                <router-link class="title" :to="{name: 'Itemlist', params:{foodId: item.id}}" target="_blank" >{{item.name}}</router-link>
                 <div class="bottom clearfix">
                   <span>{{item.collect}}收藏 · {{item.like}}点赞</span>
                 </div>
                 <div class="photo">
-                    <img :src="item.headimgurl" alt="" onerror="this.onerror=null;this.src='src/img/tou.png'">
+                    <img :src="item.headimgurl" alt="" onerror="this.onerror=null;this.src='../assets/img/tou.png'">
                     <p>{{item.author}}</p>
                 </div>
               </div>
@@ -44,7 +44,6 @@ export default {
       const response = await FoodApi.IndexShowList({
         pageId: 0
       })
-      console.log('kkkkkk', response)
       if (response.data.code == 1001) {
         this.temCardListHome = response.data.data
       } else {

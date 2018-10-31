@@ -2,11 +2,11 @@
     <el-row :gutter="20">
         <el-col class="cardCol" :xs="12" :sm="6" :md="6"  v-for="item in temTodayList" :key="item.id">
             <el-card :body-style="{ padding: '0px' }">
-                <router-link class="imgBox" :to="'#/Itemlist?foodId='+item.id" target="_blank">
+                <router-link class="imgBox" :to="{name: 'Itemlist', params: {foodId: item.id}}" target="_blank">
                      <img :src="item.img" class="image">
                 </router-link>
                 <div class="inner" style="padding: 15px;text-align:center">
-                  <router-link class="title" :to="'#/Itemlist?foodId='+item.id" target="_blank" >{{item.name}}</router-link>
+                  <router-link class="title" :to="{name: 'Itemlist', params: {foodId: item.id}}" target="_blank" >{{item.name}}</router-link>
                 </div>
           </el-card>
         </el-col>

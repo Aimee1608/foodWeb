@@ -6,7 +6,14 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+   metaInfo: {
+    title: '首页',
+    titleTemplate: '%s - 美食美荟',
+    htmlAttrs: {
+        lang: 'zh'
+    }
+  }
 }
 </script>
 

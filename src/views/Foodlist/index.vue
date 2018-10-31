@@ -5,7 +5,7 @@
             <el-col class="shotSelect" :xs="12" :sm="6" :md="6" v-for="(item,index) in classList" :key="item.id" v-if="index<=3?true:false">
                 <h1>{{item.class_name}}</h1>
                 <ul >
-                    <li v-for="ditem in item.class_names" :key="ditem.id"><a :href="'#/Foodlist?classId='+ditem.id" :class="classId==ditem.id?'chosed':''" >{{ditem.class_name}}</a></li>
+                    <li v-for="ditem in item.class_names" :key="ditem.id"><router-link :to="{name: 'Foodlist', params: {classId: ditem.id}}" :class="classId==ditem.id?'chosed':''" >{{ditem.class_name}}</router-link></li>
                 </ul>
             </el-col>
         </el-row>
@@ -14,16 +14,16 @@
           <el-row :gutter="20" class="temCard">
             <el-col class="cardCol el-col-xxs-24" :xs="12" :sm="8" :md="8"  v-for="item in temCardList" :key="item.id" v-if="temCardList.length>0?true:false" >
               <el-card :body-style="{ padding: '0px' }">
-                  <router-link class="imgBox" :to="'/Itemlist?foodId='+item.id" target="_blank">
+                  <router-link class="imgBox" :to="{name: 'Itemlist', params: {foodId: item.id}}" target="_blank">
                       <img :src="item.img" class="image">
                   </router-link>
                 <div class="inner" style="padding: 15px;">
-                  <router-link class="title" :to="'/Itemlist?foodId='+item.id" target="_blank">{{item.name}}</router-link>
+                  <router-link class="title" :to="{name: 'Itemlist', params: {foodId: item.id}}" target="_blank">{{item.name}}</router-link>
                   <div class="bottom clearfix">
                     <span>{{item.collect}}收藏 · {{item.like}}点赞</span>
                   </div>
                   <div class="photo">
-                      <img :src="item.headimgurl"  onerror="this.onerror=null;this.src='src/img/tou.png'">
+                      <img :src="item.headimgurl"  onerror="this.onerror=null;this.src='../../assets/img/tou.png'">
                       <p>{{item.author}}</p>
                   </div>
                 </div>
@@ -53,8 +53,11 @@ export default {
       pageId: 0, // 当前ID号
       classId: 0, // 分类id
       keywords: '', // 关键词
-      hasMore: true // 是否还有更多
+      hasMore: false // 是否还有更多
     }
+  },
+   metaInfo: {
+    title: '美食列表'
   },
   computed: {
     // console.log(1111);
@@ -64,8 +67,8 @@ export default {
     async showSearchShowList (initpage) {
       try {
          // 展示数据
-        this.classId = this.$route.query.classId ? parseInt(this.$route.query.classId) : ''; // 获取传参的classId
-        this.keywords = this.$route.query.keywords ? this.$route.query.keywords : '' // 获取传参的keywords
+        this.classId = this.$route.params.classId ? parseInt(this.$route.params.classId) : ''; // 获取传参的classId
+        this.keywords = this.$route.params.keywords ? this.$route.params.keywords : '' // 获取传参的keywords
         // console.log(this.$route.query,this.classId,this.keywords,this.pageId,initpage);
         if (initpage) {
           this.pageId = 0

@@ -109,6 +109,9 @@ export default {
   data () {
     return {}
   },
+  metaInfo: {
+    title: '友情链接'
+  },
   components: {
 
   }

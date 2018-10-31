@@ -6,16 +6,16 @@ export default new Router({
   mode: 'history',
   routes: [{
     path: '/',
-    name: 'Main',
     component: resolve => require(['@/components/Main'], resolve),
     children: [
       {
         path: '/',
         name: 'Home',
-        component: resolve => require(['@/views/Home/index'], resolve)
+        component: resolve => require(['@/views/Home/index'], resolve),
+        meta: {title: '美食美荟', content: '你的美味生活'}
       }, //  默认首页
       {
-        path: '/Foodlist',
+        path: '/Foodlist/:classId?/:keywords?',
         name: 'Foodlist',
         component: resolve => require(['@/views/Foodlist/index'], resolve)
       }, //  菜谱
@@ -30,7 +30,7 @@ export default new Router({
         component: resolve => require(['@/views/Hotnews/index'], resolve)
       }, // 热门文章
       {
-        path: '/Itemlist',
+        path: '/Itemlist/:foodId?',
         name: 'Itemlist',
         component: resolve => require(['@/views/Itemlist/index'], resolve)
       }, // 菜谱详情
@@ -55,5 +55,8 @@ export default new Router({
         component: resolve => require(['@/views/Advertising/index'], resolve)
       } // 广告合作
     ]
+  }, {
+    path: '*',
+    redirect: {name: 'Home'}
   }]
 })

@@ -2,7 +2,7 @@
   <div class="block" >
     <el-carousel height="200px">
       <el-carousel-item v-for="item in temCarouselList" :key="item.id">
-          <router-link class="imgBox" :to="'/Itemlist?foodId='+item.id">
+          <router-link class="imgBox" :to="{name: 'Itemlist', params: {foodId: item.id}}">
                <img :src="item.img" class="fitImg">
           </router-link>
       </el-carousel-item>
