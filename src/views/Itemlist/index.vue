@@ -173,9 +173,6 @@ export default {
   box-shadow: 0px 1px 3px rgba(100, 100, 100, 0.3);
   -webkit-box-shadow: 0px 1px 3px rgba(100, 100, 100, 0.3);
 }
-.recinfo {
-  /*padding-right:30px;*/
-}
 .recinfo h1 {
   font-size: 24px;
   margin-bottom: 26px;

@@ -95,9 +95,6 @@ export default {
   text-indent: 28px;
   margin-bottom: 20px;
 }
-.suggestionBox > div {
-  /*text-indent: 28px;*/
-}
 .suggestionBox .inputBox {
   /*text-indent: 28px;*/
   margin-left: 30px;

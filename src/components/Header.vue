@@ -272,13 +272,8 @@ export default {
   margin: 2px 0;
 }
 .selectBox a:hover {
-  /*text-decoration: underline;*/
   background-color: #a37011;
   color: #fff;
-}
-.smalltitle {
-  /*height:36px;*/
-  /*line-height: 36px;*/
 }
 .selectMore {
   margin-left: -5px;
